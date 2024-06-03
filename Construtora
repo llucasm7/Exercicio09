@@ -1,0 +1,125 @@
+abstract class PersonagemDragonBall {
+	    protected String nome;
+	    protected int idade;
+	    protected char sexo;
+	    protected String temporada;
+	    protected int ki;
+	    protected String poderEspecial;
+
+	    public PersonagemDragonBall(String nome, int idade, char sexo, String temporada, int ki, String poderEspecial) {
+	        this.nome = nome;
+	        this.idade = idade;
+	        this.sexo = sexo;
+	        this.temporada = temporada;
+	        this.ki = ki;
+	        this.poderEspecial = poderEspecial;
+	    }
+
+	    public abstract int calcularPoder();
+	}
+
+	
+	interface Transformavel {
+	    void transformar(int nivel);
+	}
+
+	
+	class Terraqueo extends PersonagemDragonBall {
+	    private String pais;
+	    private String cidade;
+
+	    public Terraqueo(String nome, int idade, char sexo, String temporada, int ki, String poderEspecial, String pais, String cidade) {
+	        super(nome, idade, sexo, temporada, ki, poderEspecial);
+	        this.pais = pais;
+	        this.cidade = cidade;
+	    }
+
+	    @Override
+	    public int calcularPoder() {
+	        return ki;
+	    }
+
+	    @Override
+	    public String toString() {
+	        return "Terraqueo [nome=" + nome + ", idade=" + idade + ", sexo=" + sexo + ", temporada=" + temporada + 
+	               ", ki=" + ki + ", poderEspecial=" + poderEspecial + ", pais=" + pais + ", cidade=" + cidade + "]";
+	    }
+	}
+
+	
+	class Sayajin extends PersonagemDragonBall implements Transformavel {
+	    private int nivelMaximoSSJ;
+	    private boolean temRabo;
+
+	    public Sayajin(String nome, int idade, char sexo, String temporada, int ki, String poderEspecial, int nivelMaximoSSJ, boolean temRabo) {
+	        super(nome, idade, sexo, temporada, ki, poderEspecial);
+	        this.nivelMaximoSSJ = nivelMaximoSSJ;
+	        this.temRabo = temRabo;
+	    }
+
+	    @Override
+	    public int calcularPoder() {
+	        return (int) (ki * (1 + nivelMaximoSSJ * 0.1));
+	    }
+
+	    @Override
+	    public void transformar(int nivel) {
+	        if (nivel >= 1 && nivel <= 3 || (nivel == 4 || nivel == 5) && (nome.equals("Goku") || nome.equals("Vegeta"))) {
+	            System.out.println(nome + " transformou para super sayajin nível " + nivel);
+	        } else {
+	            System.out.println("Não foi possível transformar esse sayajin");
+	        }
+	    }
+
+	    @Override
+	    public String toString() {
+	        return "Sayajin [nome=" + nome + ", idade=" + idade + ", sexo=" + sexo + ", temporada=" + temporada + 
+	               ", ki=" + ki + ", poderEspecial=" + poderEspecial + ", nivelMaximoSSJ=" + nivelMaximoSSJ + ", temRabo=" + temRabo + "]";
+	    }
+	}
+
+	class Namekuseijin extends PersonagemDragonBall {
+	    private int quantidadeEsferas;
+	    private boolean podeCurar;
+
+	    public Namekuseijin(String nome, int idade, char sexo, String temporada, int ki, String poderEspecial, int quantidadeEsferas, boolean podeCurar) {
+	        super(nome, idade, sexo, temporada, ki, poderEspecial);
+	        this.quantidadeEsferas = quantidadeEsferas;
+	        this.podeCurar = podeCurar;
+	    }
+
+	    @Override
+	    public int calcularPoder() {
+	        return (int) (ki * (1 + (podeCurar ? 0.2 : 0)));
+	    }
+
+	    public String fazerDesejo(String desejo) {
+	        
+	        return desejo.replace("esferas", "yutsuk").replace("dragão", "sertyo");
+	    }
+
+	    @Override
+	    public String toString() {
+	        return "Namekuseijin [nome=" + nome + ", idade=" + idade + ", sexo=" + sexo + ", temporada=" + temporada + 
+	               ", ki=" + ki + ", poderEspecial=" + poderEspecial + ", quantidadeEsferas=" + quantidadeEsferas + ", podeCurar=" + podeCurar + "]";
+	    }
+	}
+
+
+	class PersonagemFactory {
+	    public static Terraqueo criarKuririn() {
+	        return new Terraqueo("Kuririn", 35, 'M', "Z", 1500, "Kamehameha", "Terra", "Cidade do Oeste");
+	    }
+
+	    public static Sayajin criarGoku() {
+	        return new Sayajin("Goku", 40, 'M', "Super", 3000, "Kamehameha", 5, true);
+	    }
+
+	    public static Sayajin criarGohan() {
+	        return new Sayajin("Gohan", 25, 'M', "Z", 2500, "Masenko", 3, false);
+	    }
+
+	    public static Namekuseijin criarDende() {
+	        return new Namekuseijin("Dendê", 200, 'M', "Z", 1800, "Curar", 7, true);
+	    }
+	}
