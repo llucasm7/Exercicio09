@@ -1,0 +1,21 @@
+public class exercio9 {
+
+	public static void main(String[] args) {
+		
+		Sayajin goku = PersonagemFactory.criarGoku();
+        Sayajin gohan = PersonagemFactory.criarGohan();
+        Namekuseijin dende = PersonagemFactory.criarDende();
+
+        
+        goku.transformar(5);
+
+        
+        gohan.transformar(5);
+        gohan.transformar(3);
+
+        
+        String desejo = "Quero as esferas do dragão";
+        String desejoEmNamekusei = dende.fazerDesejo(desejo);
+        System.out.println("Desejo em Namekusei: " + desejoEmNamekusei);
+    }
+}
